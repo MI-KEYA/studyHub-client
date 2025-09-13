@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+body {
+    /* This ensures the gradient covers the entire page */
+    min-height: 100vh;
+    margin: 0;
+
+    /* The gradient effect */
+    background: linear-gradient(to bottom, #112a44, #4a76a8);
+
+    /* Attaches the background to the viewport, so it doesn't scroll with content */
+    background-attachment: fixed;
+}
