@@ -4,8 +4,8 @@ import { NavLink } from 'react-router';
 
 const Navbar = () => {
     const links = <>
-        <li><NavLink to=''>Tutors</NavLink></li>
-        <li><NavLink to=''>Study Sessions</NavLink></li>
+        <li className='font-bold text-white poppins'><NavLink to=''>Tutors</NavLink></li>
+        <li className='font-bold text-white poppins'><NavLink to=''>Study Sessions</NavLink></li>
     </>
     return (
         <div>
