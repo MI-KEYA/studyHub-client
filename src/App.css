@@ -19,3 +19,29 @@ body {
 .poppins {
     font-family: Poppins;
 }
+
+/* Primary Button styling with a light blue background */
+.btn-primary {
+    /* Light blue background, harmonizes with the gradient */
+    background-color: #cceeff;
+    /* Darker text for good readability on the light button */
+    color: #112a44;
+    font-weight: bold;
+    border: none;
+    padding: 6px 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover and focus effect for the light blue button */
+.btn-primary:hover,
+.btn-primary:focus {
+    /* Slightly darker blue on hover for subtle feedback */
+    background-color: #97c4dc;
+    /* Text color becomes darker for a pop */
+    color: #0c1e2b;
+}
