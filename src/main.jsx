@@ -12,6 +12,9 @@ import router from './Router/router.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <div className='poppins max-w-7xl mx-auto'>
+      <RouterProvider router={router} />
+    </div>
+
   </StrictMode>,
 )

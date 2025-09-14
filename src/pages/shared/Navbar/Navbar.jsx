@@ -1,12 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import StudyHubLogo from '../StudyHubLogo/StudyHubLogo';
 
 
 const Navbar = () => {
     const links = <>
-        <li className='font-bold text-white poppins'><NavLink to=''>Tutors</NavLink></li>
-        <li className='font-bold text-white poppins'><NavLink to=''>Study Sessions</NavLink></li>
+        <li className='font-bold  text-blue-950 lg:text-white poppins'><NavLink to='/tutors'>Tutors</NavLink></li>
+        <li className='font-bold text-blue-950 lg:text-white poppins'><NavLink to='/studysessions'>Study Sessions</NavLink></li>
     </>
     return (
         <div>
@@ -29,9 +29,9 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <div className="navbar-end gap-4 mr-5">
-                    <button className=' btn-primary'>Login</button>
-                    <button className='btn-primary'>Register</button>
+                <div className="navbar-end gap-4 ">
+                    <Link to='/login' className=' btn-primary'>Login</Link>
+                    <Link to='/register' className='btn-primary hidden lg:block'>Register</Link>
                 </div>
             </div>
         </div>
