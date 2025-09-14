@@ -45,3 +45,7 @@ body {
     /* Text color becomes darker for a pop */
     color: #0c1e2b;
 }
+
+.primary-color {
+    color: #112a44;
+}
