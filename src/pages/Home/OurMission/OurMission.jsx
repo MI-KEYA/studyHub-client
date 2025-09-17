@@ -55,7 +55,7 @@ const OurMission = () => {
                 {featuresData.map((feature, index) => (
                     <div
                         key={index}
-                        className={`card w-full shadow-xl bg-blue-100 transition-transform duration-500 hover:scale-105
+                        className={`card w-full shadow-xl bg-blue-100 transition-transform duration-500 ease-in-out hover:scale-105
                             flex flex-col items-center p-6 md:p-8
                             ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`
                         }
