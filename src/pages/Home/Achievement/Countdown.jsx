@@ -6,7 +6,7 @@ const statsData = [
         title: "Students",
         target: 15000,
         icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-blue-900 mb-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 primary-color mb-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M9 7m-4 0a4 4 4 0 1 0 8 0a4 4 4 0 1 0 -8 0"></path>
                 <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
@@ -19,7 +19,7 @@ const statsData = [
         title: "Tutorials",
         target: 8500,
         icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-blue-900 mb-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 primary-color mb-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M3 19a9 9 0 0 1 9 -9a9 9 0 0 1 9 9"></path>
                 <path d="M12 4a9 9 0 0 1 9 9"></path>
@@ -32,7 +32,7 @@ const statsData = [
         title: "Teachers",
         target: 500,
         icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-blue-900 mb-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 primary-color mb-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M12 16a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-4a2 2 0 0 1 -2 -2v-1a2 2 0 0 1 2 -2h4"></path>
                 <path d="M12 16a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-4a2 2 0 0 1 -2 -2v-1a2 2 0 0 1 2 -2h4z" stroke="none" fill="currentColor"></path>
@@ -47,7 +47,7 @@ const statsData = [
         title: "Awards",
         target: 120,
         icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-blue-900 mb-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 primary-color mb-2" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M12 15l8 -4l-8 -4l-8 4l8 4"></path>
                 <path d="M12 15v9"></path>
@@ -130,7 +130,7 @@ const Countdown = () => {
                             className="bg-blue-100 p-8 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105 flex flex-col items-center justify-center"
                         >
                             {stat.icon}
-                            <div className="font-poppins text-5xl font-extrabold text-blue-900">
+                            <div className="font-poppins text-5xl font-extrabold primary-color">
                                 {counts[index].toLocaleString()}+
                             </div>
                             <h3 className="mt-2 text-xl font-semibold text-gray-700">{stat.title}</h3>

@@ -7,6 +7,7 @@ const Navbar = () => {
     const links = <>
         <li className='font-bold  text-blue-950 lg:text-white poppins'><NavLink to='/tutors'>Tutors</NavLink></li>
         <li className='font-bold text-blue-950 lg:text-white poppins'><NavLink to='/studysessions'>Study Sessions</NavLink></li>
+        <li className='font-bold text-blue-950 lg:text-white poppins'><NavLink to='/createsession'>Create Session</NavLink></li>
     </>
     return (
         <div>

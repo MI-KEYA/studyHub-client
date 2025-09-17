@@ -7,6 +7,7 @@ import Register from '../pages/Authentication/Register';
 import Home from '../pages/Home/Home/Home';
 import Tutors from '../pages/Tutors/Tutors';
 import StudySessions from '../pages/StudySession/StudySessions';
+import CreateSession from '../pages/CreateSession/CreateSession';
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: 'studysessions',
                 Component: StudySessions
+            },
+            {
+                path: 'createsession',
+                Component: CreateSession
             }
         ]
 
