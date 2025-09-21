@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
 
@@ -8,6 +8,12 @@ const Login = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm()
     const { loading, signIn } = useContext(AuthContext)
+
+    const location = useLocation()
+    const navigate = useNavigate()
+    console.log(location);
+
+    const from = location.state?.from || '/'
 
     const onSubmit = (data) => {
         console.log(data);
@@ -20,6 +26,7 @@ const Login = () => {
                     timer: 1500,
                     showConfirmButton: false
                 });
+                navigate(from)
             })
             .catch(error => {
                 const errorMessage = error.message.replace("Firebase: ", "").replace(/\(auth.*\)/, "").trim();
