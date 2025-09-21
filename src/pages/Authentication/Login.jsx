@@ -1,15 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
+import { AuthContext } from '../../context/AuthContext/AuthContext';
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm()
+    const { loading, signIn } = useContext(AuthContext)
 
     const onSubmit = (data) => {
         console.log(data);
+        signIn(data.email, data.password)
+            .then(result => {
+                console.log(result.user);
+                Swal.fire({
+                    title: "Logged In Successfully",
+                    icon: "success",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            })
+            .catch(error => {
+                const errorMessage = error.message.replace("Firebase: ", "").replace(/\(auth.*\)/, "").trim();
+                console.log(error);
+                Swal.fire({
+                    title: "Login Failed",
+                    text: errorMessage,
+                    icon: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "Try Again"
+                });
+            })
     }
-
+    if (loading) {
+        <p>loading....</p>
+    }
     return (
         <div className='flex justify-center items-center min-h-screen'>
             <form onSubmit={handleSubmit(onSubmit)} className='bg-blue-100  rounded-lg shadow-2xl p-10 '>
@@ -55,6 +81,7 @@ const Login = () => {
                     </div>
 
                     {/* submit Button */}
+
                     <div>
                         <button type='submit'
                             className='btn text-white w-full rounded-lg bg-[#112a44] hover:bg-blue-900'>

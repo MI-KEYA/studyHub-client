@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import StudyHubLogo from '../StudyHubLogo/StudyHubLogo';
+import { AuthContext } from '../../../context/AuthContext/AuthContext';
 
 
 const Navbar = () => {
+
+    const { user, logOut } = useContext(AuthContext)
+
     const links = <>
         <li className='font-bold  text-blue-950 lg:text-white poppins'><NavLink to='/tutors'>Tutors</NavLink></li>
         <li className='font-bold text-blue-950 lg:text-white poppins'><NavLink to='/studysessions'>Study Sessions</NavLink></li>
         <li className='font-bold text-blue-950 lg:text-white poppins'><NavLink to='/createsession'>Create Session</NavLink></li>
     </>
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                console.log("logged out");
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+
     return (
         <div>
             <div className="navbar bg-transparent shadow-sm">
@@ -31,8 +47,15 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-4 ">
-                    <Link to='/login' className=' btn-primary'>Login</Link>
-                    <Link to='/register' className='btn-primary hidden lg:block'>Register</Link>
+                    {/* <p>{user.email}</p> */}
+                    {user ? (
+                        <button onClick={handleLogOut} className=' btn-primary'>LogOut</button>
+                    ) : (
+                        <Link to='/login' className=' btn-primary'>Login</Link>
+                    )
+                    }
+
+
                 </div>
             </div>
         </div>
