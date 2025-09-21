@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import StudyHubLogo from '../StudyHubLogo/StudyHubLogo';
 import { AuthContext } from '../../../context/AuthContext/AuthContext';
+import Swal from 'sweetalert2';
 
 
 const Navbar = () => {
@@ -18,6 +19,12 @@ const Navbar = () => {
         logOut()
             .then(() => {
                 console.log("logged out");
+                Swal.fire({
+                    title: "Logged Out Successfully",
+                    icon: "success",
+                    timer: 1500,
+                    showConfirmButton: false,
+                });
             })
             .catch((error) => {
                 console.log(error);
