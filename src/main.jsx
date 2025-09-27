@@ -9,6 +9,10 @@ import { RouterProvider } from "react-router/dom";
 import router from './Router/router.jsx';
 import AuthProvider from './context/AuthContext/AuthProvider.jsx';
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+
+const queryClient = new QueryClient();
+
 // Initialize AOS here, after the imports
 AOS.init({
   duration: 2000,
@@ -19,9 +23,11 @@ AOS.init({
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <div className='poppins max-w-7xl mx-auto'>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
+      </QueryClientProvider>
     </div>
 
   </StrictMode>,

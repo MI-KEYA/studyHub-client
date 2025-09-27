@@ -13,15 +13,15 @@ import PrivateRoute from '../Routes/PrivateRoute';
 const router = createBrowserRouter([
     {
         path: "/",
-        Component: RootLayout,
+        element: <RootLayout />,
         children: [
             {
                 index: true,
-                Component: Home
+                element: <Home />
             },
             {
                 path: 'tutors',
-                Component: Tutors
+                element: <Tutors />
             },
             {
                 path: 'studysessions',
@@ -31,25 +31,25 @@ const router = createBrowserRouter([
             },
             {
                 path: 'createsession',
-                Component: CreateSession
+                element: <CreateSession />
             }
         ]
-
     },
     {
         path: "/",
-        Component: AuthLayout,
+        element: <AuthLayout />,
         children: [
             {
                 path: 'login',
-                Component: Login
+                element: <Login />
             },
             {
                 path: 'register',
-                Component: Register
+                element: <Register />
             }
         ]
     }
 ]);
+
 
 export default router;

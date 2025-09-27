@@ -1,12 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../context/AuthContext/AuthContext';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const CreateSession = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { user } = useContext(AuthContext)
+    const axiosSecure = useAxiosSecure();
+
+
+
 
     // Handle form submission and log data to console
     const onSubmit = (data) => {
         console.log("Session created:", data);
+        const sessionData = {
+            ...data,
+            email: user.email,
+            createdAt: new Date(),
+        };
+        // save data
+        axiosSecure.post('/sessions', sessionData)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Your study session has been created.",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            })
+
+        console.log('Saved session:', sessionData);
     };
 
     return (
@@ -39,6 +68,7 @@ const CreateSession = () => {
                         />
                         {errors.tutorName && <p className="text-red-500 text-sm mt-1">{errors.tutorName.message}</p>}
                     </div>
+
 
                     {/* Session Image URL */}
                     <div>
