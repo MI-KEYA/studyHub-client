@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import StudyHubLogo from '../shared/StudyHubLogo/StudyHubLogo';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
+import SocialLogin from './SocialLogin';
 
 const Register = () => {
 
@@ -92,6 +93,7 @@ const Register = () => {
                     <p className='text-sm text-center mt-5'>
                         Already Have an Account? <Link to='/login' className='text-blue-900 underline font-bold'>Login</Link>
                     </p>
+                    <SocialLogin />
                 </form>
             </div >
         </div>

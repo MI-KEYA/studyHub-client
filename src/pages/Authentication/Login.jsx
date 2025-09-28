@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import Swal from 'sweetalert2';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
 
@@ -102,7 +103,10 @@ const Login = () => {
                     {/* text */}
 
                     <p className='text-sm text-center'>Don't Have an Account? <Link to='/register' className='primary-color underline font-bold'>Register</Link></p>
+
+                    <SocialLogin />
                 </form>
+
             </div>
         </div>
     );
