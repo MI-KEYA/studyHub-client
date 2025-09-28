@@ -88,7 +88,7 @@ const StudySession = () => {
             </h2>
 
             {/* Table */}
-            <div id="sessions-table" className="overflow-x-auto bg-white rounded-xl shadow-2xl">
+            <div id="sessions-table" className="overflow-x-auto bg-blue-100 rounded-xl shadow-2xl">
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-[#112a44] text-white">
                         <tr>
@@ -100,7 +100,7 @@ const StudySession = () => {
                             <th className="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider rounded-tr-xl">Action</th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-blue-100 divide-y divide-gray-200">
                         {currentItems.map((session) => (
                             <tr key={session._id} className="hover:bg-blue-50 transition duration-150 ease-in-out">
                                 <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{session.sessionTitle}</td>
