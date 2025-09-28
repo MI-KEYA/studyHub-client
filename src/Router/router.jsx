@@ -9,6 +9,11 @@ import Tutors from '../pages/Tutors/Tutors';
 import StudySessions from '../pages/StudySession/StudySessions';
 import CreateSession from '../pages/CreateSession/CreateSession';
 import PrivateRoute from '../Routes/PrivateRoute';
+import DashboardLayout from '../Layouts/DashboardLayout';
+import ViewBookedSession from '../pages/Dashboard/ViewBookedSession/ViewBookedSession';
+import CreateNote from '../pages/Dashboard/CreateNote/CreateNote';
+import ViewMaterials from '../pages/Dashboard/ViewMaterials/ViewMaterials';
+import ManageNote from '../pages/Dashboard/ManageNote/ManageNote';
 
 const router = createBrowserRouter([
     {
@@ -21,7 +26,9 @@ const router = createBrowserRouter([
             },
             {
                 path: 'tutors',
-                element: <Tutors />
+                element: <PrivateRoute>
+                    <Tutors />
+                </PrivateRoute>
             },
             {
                 path: 'studysessions',
@@ -31,7 +38,9 @@ const router = createBrowserRouter([
             },
             {
                 path: 'createsession',
-                element: <CreateSession />
+                element: <PrivateRoute>
+                    <CreateSession />
+                </PrivateRoute>
             }
         ]
     },
@@ -46,6 +55,30 @@ const router = createBrowserRouter([
             {
                 path: 'register',
                 element: <Register />
+            }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute>
+            <DashboardLayout />
+        </PrivateRoute>,
+        children: [
+            {
+                path: 'viewbookedsession',
+                element: <ViewBookedSession />
+            },
+            {
+                path: 'createNote',
+                element: <CreateNote />
+            },
+            {
+                path: 'manageNote',
+                element: <ManageNote />
+            },
+            {
+                path: 'viewMaterials',
+                element: <ViewMaterials />
             }
         ]
     }
