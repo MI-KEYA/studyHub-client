@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 import Swal from "sweetalert2";
 import SessionModal from "./SessionModal";
+import { MdDeleteForever } from "react-icons/md";
 
 const StudySession = () => {
     const axiosSecure = useAxiosSecure();
@@ -13,7 +14,7 @@ const StudySession = () => {
     const itemsPerPage = 10;
 
     // Fetch study sessions
-    const { data: sessions = [], isLoading, isError } = useQuery({
+    const { data: sessions = [], refetch, isLoading, isError } = useQuery({
         queryKey: ["sessions"],
         queryFn: async () => {
             const res = await axiosSecure.get("/sessions");
@@ -51,6 +52,39 @@ const StudySession = () => {
     const handleViewDetails = (session) => {
         setSelectedSessionId(session._id);
     };
+
+    const handleDelete = async (session) => {
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: "Do you really want to delete",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const res = await axiosSecure.delete(`/sessions/${session._id}`);
+                if (res.data.deletedCount > 0) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Session has been deleted.",
+                        icon: "success",
+                        timer: 1500,
+                        showConfirmButton: false,
+                    });
+                    refetch()
+                }
+            } catch (error) {
+                Swal.fire("Error", "Failed to delete session.", "error");
+            }
+        }
+    };
+
+
+
 
     const handleCloseModal = () => {
         setSelectedSessionId(null);
@@ -92,7 +126,8 @@ const StudySession = () => {
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-[#112a44] text-white">
                         <tr>
-                            <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tl-xl">Title</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tl-xl">#</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ">Title</th>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Tutor</th>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Reg. Fee</th>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Reg. Start</th>
@@ -101,20 +136,26 @@ const StudySession = () => {
                         </tr>
                     </thead>
                     <tbody className="bg-blue-100 divide-y divide-gray-200">
-                        {currentItems.map((session) => (
+                        {currentItems.map((session, index) => (
                             <tr key={session._id} className="hover:bg-blue-50 transition duration-150 ease-in-out">
+                                <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index}</td>
                                 <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{session.sessionTitle}</td>
                                 <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600">{session.tutorName}</td>
                                 <td className="px-4 py-4 whitespace-nowrap text-sm font-bold text-green-600">${session.regFee}</td>
                                 <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600">{session.regStartDate}</td>
                                 <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600">{session.regEndDate}</td>
                                 <td className="px-4 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                    <button
-                                        onClick={() => handleViewDetails(session)}
-                                        className="bg-[#112a44] hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
-                                    >
-                                        View Details
-                                    </button>
+                                    <div className="flex items-center justify-center gap-4">
+                                        <button
+                                            onClick={() => handleViewDetails(session)}
+                                            className="bg-[#112a44] hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                                        >
+                                            View Details
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(session)}
+                                            className="text-red-500 hover:text-red-400 font-semibold py-2 px-4 text-2xl rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"><MdDeleteForever /></button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
