@@ -18,6 +18,7 @@ const CreateSession = () => {
         const sessionData = {
             ...data,
             email: user.email,
+            registration_status: 'pending',
             createdAt: new Date(),
         };
         // save data

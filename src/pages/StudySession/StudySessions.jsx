@@ -5,15 +5,16 @@ import { ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 import Swal from "sweetalert2";
 import SessionModal from "./SessionModal";
 import { MdDeleteForever } from "react-icons/md";
+import { useNavigate } from "react-router"; // ✅ fixed
 
 const StudySession = () => {
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate(); // ✅ fixed
 
     const [selectedSessionId, setSelectedSessionId] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
-    // Fetch study sessions
     const { data: sessions = [], refetch, isLoading, isError } = useQuery({
         queryKey: ["sessions"],
         queryFn: async () => {
@@ -22,7 +23,6 @@ const StudySession = () => {
         },
     });
 
-    // Fetch single session details
     const { data: selectedSession, isLoading: isDetailLoading } = useQuery({
         queryKey: ["session", selectedSessionId],
         queryFn: async () => {
@@ -32,7 +32,6 @@ const StudySession = () => {
         enabled: !!selectedSessionId,
     });
 
-    // Pagination
     const totalPages = Math.ceil(sessions.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -48,7 +47,6 @@ const StudySession = () => {
         }
     };
 
-    // Open / Close modal
     const handleViewDetails = (session) => {
         setSelectedSessionId(session._id);
     };
@@ -75,7 +73,7 @@ const StudySession = () => {
                         timer: 1500,
                         showConfirmButton: false,
                     });
-                    refetch()
+                    refetch();
                 }
             } catch (error) {
                 Swal.fire("Error", "Failed to delete session.", "error");
@@ -83,34 +81,33 @@ const StudySession = () => {
         }
     };
 
-
-
-
     const handleCloseModal = () => {
         setSelectedSessionId(null);
     };
 
-    // Registration button click
-    const handleRegistrationClick = () => {
-        if (!selectedSession) return;
-        Swal.fire({
-            title: "Success!",
-            text: `Registration initiated for: ${selectedSession.sessionTitle}`,
-            icon: "success",
-            confirmButtonColor: "#112a44",
-        });
-        handleCloseModal();
+    const handleRegistrationClick = (session) => {
+        navigate(`/payment/${session._id}`); // ✅ fixed
     };
 
-    if (isLoading) return <p className="text-center p-8 text-lg font-medium text-gray-700">Loading study sessions...</p>;
+    if (isLoading)
+        return (
+            <p className="text-center p-8 text-lg font-medium text-gray-700">
+                Loading study sessions...
+            </p>
+        );
 
     if (isError || !sessions.length) {
         return (
             <div className="p-8 text-center text-lg">
                 <p className="text-xl font-bold text-[#112a44]">
-                    <BookOpen className="inline mr-2" />No study sessions found at the moment.
+                    <BookOpen className="inline mr-2" />
+                    No study sessions found at the moment.
                 </p>
-                {isError && <p className="text-red-500 mt-2 font-semibold">Error loading data.</p>}
+                {isError && (
+                    <p className="text-red-500 mt-2 font-semibold">
+                        Error loading data.
+                    </p>
+                )}
             </div>
         );
     }
@@ -127,7 +124,7 @@ const StudySession = () => {
                     <thead className="bg-[#112a44] text-white">
                         <tr>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider rounded-tl-xl">#</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider ">Title</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Title</th>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Tutor</th>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Reg. Fee</th>
                             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Reg. Start</th>
@@ -138,7 +135,7 @@ const StudySession = () => {
                     <tbody className="bg-blue-100 divide-y divide-gray-200">
                         {currentItems.map((session, index) => (
                             <tr key={session._id} className="hover:bg-blue-50 transition duration-150 ease-in-out">
-                                <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index}</td>
+                                <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
                                 <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{session.sessionTitle}</td>
                                 <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-600">{session.tutorName}</td>
                                 <td className="px-4 py-4 whitespace-nowrap text-sm font-bold text-green-600">${session.regFee}</td>
@@ -154,7 +151,10 @@ const StudySession = () => {
                                         </button>
                                         <button
                                             onClick={() => handleDelete(session)}
-                                            className="text-red-500 hover:text-red-400 font-semibold py-2 px-4 text-2xl rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"><MdDeleteForever /></button>
+                                            className="text-red-500 hover:text-red-400 font-semibold py-2 px-4 text-2xl rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                                        >
+                                            <MdDeleteForever />
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -205,7 +205,7 @@ const StudySession = () => {
             <SessionModal
                 session={selectedSession}
                 onClose={handleCloseModal}
-                onRegister={handleRegistrationClick}
+                onRegister={() => handleRegistrationClick(selectedSession)} // ✅ fixed
                 isDetailLoading={isDetailLoading}
             />
         </div>

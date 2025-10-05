@@ -1,5 +1,6 @@
 import React from "react";
 import { BookOpen } from "lucide-react";
+import { Link } from "react-router";
 
 // Reusable component for displaying a detail row
 const DetailItem = ({ label, value, color = "text-gray-700", isBold = false }) => (
@@ -79,6 +80,7 @@ const SessionModal = ({ session, onClose, onRegister, isDetailLoading }) => {
                     <span className={`text-base font-extrabold ${isRegistrationOpen ? "text-green-600" : "text-red-500"}`}>
                         Status: {isRegistrationOpen ? "Open" : "Closed"}
                     </span>
+
                     <button onClick={buttonAction} className={buttonClass} disabled={!isRegistrationOpen}>
                         {buttonText}
                     </button>

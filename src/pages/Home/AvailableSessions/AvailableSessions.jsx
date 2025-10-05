@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const AvailableSessions = () => {
     const axiosSecure = useAxiosSecure();
@@ -62,9 +63,11 @@ const AvailableSessions = () => {
                             >
                                 {getStatus(session.regEndDate)}
                             </span>
-                            <button className="bg-[#112a44] hover:bg-blue-900 text-white px-4 py-2 rounded-lg text-sm">
-                                Read More
-                            </button>
+                            <Link to={`/sessions/${session._id}`}>
+                                <button className="bg-[#112a44] hover:bg-blue-900 text-white px-4 py-2 rounded-lg text-sm">
+                                    Read More
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 ))}

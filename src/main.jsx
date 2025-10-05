@@ -22,7 +22,7 @@ AOS.init({
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <div className='poppins max-w-7xl mx-auto'>
+    <div className='poppins  max-w-7xl  mx-auto'>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <RouterProvider router={router} />

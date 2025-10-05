@@ -14,6 +14,9 @@ import ViewBookedSession from '../pages/Dashboard/ViewBookedSession/ViewBookedSe
 import CreateNote from '../pages/Dashboard/CreateNote/CreateNote';
 import ViewMaterials from '../pages/Dashboard/ViewMaterials/ViewMaterials';
 import ManageNote from '../pages/Dashboard/ManageNote/ManageNote';
+import ViewDetails from '../pages/Home/AvailableSessions/ViewDetails';
+import Payment from '../pages/shared/payment/Payment';
+import PaymentLayout from '../Layouts/PaymentLayout';
 
 const router = createBrowserRouter([
     {
@@ -25,6 +28,12 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
+                path: 'sessions/:id',
+                element: <PrivateRoute>
+                    <ViewDetails />
+                </PrivateRoute>
+            },
+            {
                 path: 'tutors',
                 element: <PrivateRoute>
                     <Tutors />
@@ -34,7 +43,8 @@ const router = createBrowserRouter([
                 path: 'studysessions',
                 element: <PrivateRoute>
                     <StudySessions />
-                </PrivateRoute>
+                </PrivateRoute>,
+
             },
             {
                 path: 'createsession',
@@ -42,6 +52,8 @@ const router = createBrowserRouter([
                     <CreateSession />
                 </PrivateRoute>
             }
+
+
         ]
     },
     {
@@ -79,6 +91,20 @@ const router = createBrowserRouter([
             {
                 path: 'viewMaterials',
                 element: <ViewMaterials />
+            }
+        ]
+    },
+    {
+        path: '/payment',
+        element: <PrivateRoute>
+            <PaymentLayout />
+        </PrivateRoute>,
+        children: [
+            {
+                path: ':sessionId',
+                element: <PrivateRoute>
+                    <Payment />
+                </PrivateRoute>
             }
         ]
     }
